@@ -1,5 +1,5 @@
 {
-    "name": "@jupyterlab/git",
+    "name": "@jupyterlab/git/cs",
     "version": "0.50.0",
     "description": "A JupyterLab extension for version control using git",
     "main": "lib/index.js",
@@ -152,12 +152,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/jupyterlab/jupyterlab-git.git"
+        "url": "https://github.com/adhithya71/jupyterlab-git-cs"
     },
     "bugs": {
-        "url": "https://github.com/jupyterlab/jupyterlab-git/issues"
+        "url": "https://github.com/adhithya71/jupyterlab-git-cs/pulls"
     },
-    "homepage": "https://github.com/jupyterlab/jupyterlab-git",
+    "homepage": "https://github.com/adhithya71/jupyterlab-git-cs",
     "jupyterlab": {
         "discovery": {
             "server": {
@@ -166,7 +166,7 @@
                     "conda"
                 ],
                 "base": {
-                    "name": "jupyterlab-git"
+                    "name": "jupyterlab-git-cs"
                 }
             }
         },
