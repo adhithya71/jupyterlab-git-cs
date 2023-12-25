@@ -24,6 +24,10 @@ from nbdime import diff_notebooks, merge_notebooks
 
 from .log import get_logger
 
+# os.environ["GIT_USERNAME"]="adhithya71"
+# os.environ["GIT_TOKEN"]="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"
+print("Inside git.py --> ")
+
 # Regex pattern to capture (key, value) of Git configuration options.
 # See https://git-scm.com/docs/git-config#_syntax for git var syntax
 CONFIG_PATTERN = re.compile(r"(?:^|\n)([\w\-\.]+)\=")
@@ -244,8 +248,10 @@ class Git:
             cwd=cwd,
             timeout=self._execute_timeout,
             env=env,
-            username=username,
-            password=password,
+            # username=username,
+            # password=password,
+            username=os.environ.get("GIT_USERNAME"),
+            password=os.environ.get("GIT_TOKEN"),
             is_binary=is_binary,
         )
 
@@ -1273,14 +1279,24 @@ class Git:
         command.extend([remote, branch])
 
         env = os.environ.copy()
+        # Pushing to the git branch configured in notebook page
+        username = (os.environ.get("GIT_USERNAME"),)
+        password = (os.environ.get("GIT_TOKEN"),)
+
+        # os.environ["GIT_USERNAME"] = "adhithya71"
+        # os.environ["GIT_TOKEN"] = "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"
+        print("Inside push --> git.py ")
+
         if auth:
             if auth.get("cache_credentials"):
                 await self.ensure_credential_helper(path)
             env["GIT_TERMINAL_PROMPT"] = "1"
             code, output, error = await self.__execute(
                 command,
-                username=auth["username"],
-                password=auth["password"],
+                # username=auth["username"],
+                # password=auth["password"],
+                username=os.environ.get("GIT_USERNAME"),
+                password=os.environ.get("GIT_TOKEN"),
                 cwd=path,
                 env=env,
             )
