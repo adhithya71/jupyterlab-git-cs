@@ -13,9 +13,6 @@ from jupyter_server.services.contents.manager import ContentsManager
 from jupyter_server.utils import url2path, url_path_join, ensure_async
 from packaging.version import parse
 
-# os.environ["GIT_USERNAME"]="adhithya71"
-# os.environ["GIT_TOKEN"]="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"
-print("Inside handlers --> ")
 
 import fnmatch
 
@@ -657,7 +654,6 @@ class GitPushHandler(GitHandler):
             }
 
         if current_upstream_branch["code"] == 0:
-            print("inside if")
             branch = ":".join(["HEAD", current_upstream_branch["remote_branch"]])
             response = await self.git.push(
                 current_upstream_branch["remote_short_name"],
@@ -672,7 +668,6 @@ class GitPushHandler(GitHandler):
             # Allow users to specify upstream through their configuration
             # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
             # Or use the remote defined if only one remote exists
-            print("inside else")
 
             config = await self.git.config(local_path)
             config_options = config["options"]

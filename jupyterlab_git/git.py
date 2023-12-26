@@ -24,9 +24,6 @@ from nbdime import diff_notebooks, merge_notebooks
 
 from .log import get_logger
 
-# os.environ["GIT_USERNAME"]="adhithya71"
-# os.environ["GIT_TOKEN"]="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"
-print("Inside git.py --> ")
 
 # Regex pattern to capture (key, value) of Git configuration options.
 # See https://git-scm.com/docs/git-config#_syntax for git var syntax
@@ -1279,13 +1276,6 @@ class Git:
         command.extend([remote, branch])
 
         env = os.environ.copy()
-        # Pushing to the git branch configured in notebook page
-        username = (os.environ.get("GIT_USERNAME"),)
-        password = (os.environ.get("GIT_TOKEN"),)
-
-        # os.environ["GIT_USERNAME"] = "adhithya71"
-        # os.environ["GIT_TOKEN"] = "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"
-        print("Inside push --> git.py ")
 
         if auth:
             if auth.get("cache_credentials"):
@@ -1293,17 +1283,22 @@ class Git:
             env["GIT_TERMINAL_PROMPT"] = "1"
             code, output, error = await self.__execute(
                 command,
-                # username=auth["username"],
-                # password=auth["password"],
-                username=os.environ.get("GIT_USERNAME"),
-                password=os.environ.get("GIT_TOKEN"),
+                username=auth["username"],
+                password=auth["password"],
+                # username=os.environ.get("GIT_USERNAME"),
+                # password=os.environ.get("GIT_TOKEN"),
                 cwd=path,
                 env=env,
             )
         else:
-            env["GIT_TERMINAL_PROMPT"] = "0"
+            env["GIT_TERMINAL_PROMPT"] = "1"
+            username = os.getenv("GIT_USERNAME")
+            password = os.getenv("GIT_PWD")
+            print(f"Pushing to custom git repository -> {username}")
             code, output, error = await self.__execute(
                 command,
+                username=username,
+                password=password,
                 env=env,
                 cwd=path,
             )
