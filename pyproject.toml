@@ -59,12 +59,15 @@ fields = ["description", "authors", "urls"]
 
 [tool.hatch.build.targets.sdist]
 artifacts = ["cs_jupyterlab_git/labextension"]
-exclude = [".github", "binder"]
+exclude = [".github", "binder","labextensions"]
 
 [tool.hatch.build.targets.wheel.shared-data]
 "cs_jupyterlab_git/labextension" = "share/jupyter/labextensions/@jupyterlab/git"
 "install.json" = "share/jupyter/labextensions/@jupyterlab/git/install.json"
 "jupyter-config/server-config" = "etc/jupyter/jupyter_server_config.d"
+
+[tool.hatch.metadata.package_data]
+"cs_jupyterlab_git" = ["labextensions/*"]
 
 [tool.hatch.build.hooks.version]
 path = "cs_jupyterlab_git/_version.py"
