@@ -195,7 +195,7 @@
   },
   "jupyter.lab.internationalization": {
     "selectors": ["jupyter.lab.menus/.*/args/text"],
-    "domain": "jupyterlab_git"
+    "domain": "cs_jupyterlab_git"
   },
   "jupyter.lab.toolbars": {
     "FileBrowser": [{ "name": "gitClone", "rank": 31 }]

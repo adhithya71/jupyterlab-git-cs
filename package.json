@@ -166,7 +166,7 @@
                     "conda"
                 ],
                 "base": {
-                    "name": "jupyterlab_git"
+                    "name": "cs_jupyterlab_git"
                 }
             }
         },
