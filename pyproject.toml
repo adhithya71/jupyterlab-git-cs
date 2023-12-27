@@ -86,7 +86,7 @@ npm = ["jlpm"]
 build_cmd = "install:extension"
 npm = ["jlpm"]
 source_dir = "src"
-build_dir = "jupyterlab_git/labextension"
+build_dir = "cs_jupyterlab_git/labextension"
 
 [tool.jupyter-releaser.options]
 version_cmd = "hatch version"
