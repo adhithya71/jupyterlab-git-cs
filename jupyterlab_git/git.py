@@ -24,7 +24,6 @@ from nbdime import diff_notebooks, merge_notebooks
 
 from .log import get_logger
 
-
 # Regex pattern to capture (key, value) of Git configuration options.
 # See https://git-scm.com/docs/git-config#_syntax for git var syntax
 CONFIG_PATTERN = re.compile(r"(?:^|\n)([\w\-\.]+)\=")
@@ -245,10 +244,8 @@ class Git:
             cwd=cwd,
             timeout=self._execute_timeout,
             env=env,
-            # username=username,
-            # password=password,
-            username=os.environ.get("GIT_USERNAME"),
-            password=os.environ.get("GIT_TOKEN"),
+            username=username,
+            password=password,
             is_binary=is_binary,
         )
 
@@ -1276,7 +1273,6 @@ class Git:
         command.extend([remote, branch])
 
         env = os.environ.copy()
-
         if auth:
             if auth.get("cache_credentials"):
                 await self.ensure_credential_helper(path)
@@ -1285,16 +1281,14 @@ class Git:
                 command,
                 username=auth["username"],
                 password=auth["password"],
-                # username=os.environ.get("GIT_USERNAME"),
-                # password=os.environ.get("GIT_TOKEN"),
                 cwd=path,
                 env=env,
             )
         else:
             env["GIT_TERMINAL_PROMPT"] = "1"
+            print("Terminal prompt is now 1")
             username = os.getenv("GIT_USERNAME")
-            password = os.getenv("GIT_PWD")
-            print(f"Pushing to custom git repository -> {username}")
+            password = os.getenv("GIT_TOKEN")
             code, output, error = await self.__execute(
                 command,
                 username=username,
